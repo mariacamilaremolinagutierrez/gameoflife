@@ -1,9 +1,5 @@
 /* 
 Conway's game of life...
-
- NW N NE
- W E
- SW S SE
  
 Rules:
 1. Death from isolation: Each live cell with less than two live neighbors dies
@@ -15,14 +11,26 @@ next generation
 4. Survival: Each live cell with two live neighbors survives in the next
 generation
 
-Authors: Milton Quiroga & Maria Camila Remolina Gutierrez
+Authors: 
+Milton Quiroga
+Maria Camila Remolina Gutierrez
 */
 
 int[][] grid, futureGrid; // current state and next generation
 int iterations = 0;
 
 void setup() {
-  size(800, 500); frameRate(8);
+  
+  /* Dimensions of canvas: */
+  size(17,17); 
+  
+  /* Frame rate: */
+  frameRate(8);
+  
+  /* Background: */
+  background(255,255,255);
+  
+  /* Initial state: */
   grid = new int[width][height];
   futureGrid = new int[width][height];
 
@@ -34,8 +42,68 @@ void setup() {
   } 
   // end for() del llenado inicial de la vaina
   */
+  
+  /* Pulsar: */
+  
+  // Horizontal lines
+  grid[2][4] = 1; 
+  grid[2][5] = 1;
+  grid[2][6] = 1;
+  grid[2][10] = 1;
+  grid[2][11] = 1;
+  grid[2][12] = 1;
+  
+  grid[7][4] = 1; 
+  grid[7][5] = 1;
+  grid[7][6] = 1;
+  grid[7][10] = 1;
+  grid[7][11] = 1;
+  grid[7][12] = 1;
+  
+  grid[9][4] = 1; 
+  grid[9][5] = 1;
+  grid[9][6] = 1;
+  grid[9][10] = 1;
+  grid[9][11] = 1;
+  grid[9][12] = 1;
  
-  /* Voy a hacer un glider
+  grid[14][4] = 1; 
+  grid[14][5] = 1;
+  grid[14][6] = 1;
+  grid[14][10] = 1;
+  grid[14][11] = 1;
+  grid[14][12] = 1;
+  
+  //Vertical lines
+  grid[4][2] = 1; 
+  grid[5][2] = 1;
+  grid[6][2] = 1;
+  grid[10][2] = 1;
+  grid[11][2] = 1;
+  grid[12][2] = 1;
+  
+  grid[4][7] = 1; 
+  grid[5][7] = 1;
+  grid[6][7] = 1;
+  grid[10][7] = 1;
+  grid[11][7] = 1;
+  grid[12][7] = 1;
+  
+  grid[4][9] = 1; 
+  grid[5][9] = 1;
+  grid[6][9] = 1;
+  grid[10][9] = 1;
+  grid[11][9] = 1;
+  grid[12][9] = 1;
+ 
+  grid[4][14] = 1; 
+  grid[5][14] = 1;
+  grid[6][14] = 1;
+  grid[10][14] = 1;
+  grid[11][14] = 1;
+  grid[12][14] = 1;
+ 
+  /* Glider:
   grid[1][1] = 0; grid[2][1] = 1;
   grid[3][1] = 0;
   grid[1][2] = 0;
@@ -45,25 +113,29 @@ void setup() {
   grid[2][3] = 1;
   grid[3][3] = 1;
   */
-
-  // este código imprime un patrón de 28 "live" pixels in a straight line that achieves infinite growth
+  
+  /* Patrón de 28 "live" pixels in a straight line that achieves infinite growth:
   grid[401][250] = 1;
   grid[402][250] = 1;
-  grid[403][250] = 1; grid[404][250] = 1;
+  grid[403][250] = 1; 
+  grid[404][250] = 1;
   grid[405][250] = 1;
-  grid[406][250] = 1; grid[407][250] = 1;
+  grid[406][250] = 1; 
+  grid[407][250] = 1;
   grid[408][250] = 1;
 
   grid[409][250] = 0;
   grid[410][250] = 1;
-  grid[411][250] = 1; grid[412][250] = 1;
+  grid[411][250] = 1; 
+  grid[412][250] = 1;
   grid[413][250] = 1;
   grid[414][250] = 1;
   grid[415][250] = 0;
   grid[416][250] = 0;
   grid[417][250] = 0;
 
-  grid[418][250] = 1; grid[419][250] = 1;
+  grid[418][250] = 1; 
+  grid[419][250] = 1;
   grid[420][250] = 1;
 
   grid[421][250] = 0;
@@ -72,9 +144,11 @@ void setup() {
   grid[424][250] = 0;
   grid[425][250] = 0;
   grid[426][250] = 0;
-  grid[427][250] = 1; grid[428][250] = 1;
+  grid[427][250] = 1; 
+  grid[428][250] = 1;
   grid[429][250] = 1;
-  grid[430][250] = 1; grid[431][250] = 1;
+  grid[430][250] = 1; 
+  grid[431][250] = 1;
   grid[432][250] = 1;
   grid[433][250] = 1;
   grid[434][250] = 0;
@@ -83,20 +157,21 @@ void setup() {
   grid[437][250] = 1;
   grid[438][250] = 1;
   grid[439][250] = 1;
-
-  background(255,255,255);
- 
+  */
+  
+  /* Coloring according to grid: */
   for (int x = 1; x < width-1; x=x+1) {
     for (int y = 1; y < height-1; y=y+1) {
       if(grid[x][y] == 1) {
-        set(x, y, color(255));
-      } else {
         set(x, y, color(0));
+      } else {
+        set(x, y, color(255));
       } // end if then else
     } //end for()
   } // end for()
 
-  saveFrame("frames/first.png"); // el primero de todos...
+  /* Save initial state: */
+  saveFrame("frames/first.png"); 
 } // end setup...
 
 void draw() {
