@@ -2,14 +2,13 @@
 Conway's game of life...
  
 Rules:
-1. Death from isolation: Each live cell with less than two live neighbors dies
-in the next generation
-2. Death from overpopulation: Each cell with four or more live neighbors dies
-in the next generation
-3. Birth: Each dead cell with exactly three live neighbors comes to life in the
-next generation
-4. Survival: Each live cell with two live neighbors survives in the next
-generation
+5. Vichniac Vote Rule:
+A new cell is alive if the total number of alive neighbours in its neighborhood 
+grid is four, six, seven, eight, or nine, and the new cell is dead if the 
+total number of alive neighbours is zero, one, two, three, or five. 
+
+Alive = 1
+Dead = 0
 
 Instructions:
 * Press SPACE BAR to pause and change the cell's values with the mouse 
@@ -124,7 +123,7 @@ void draw() {
 
 
 void iteration() { // When the clock ticks
-  // Save cells to buffer (so we opeate with one array keeping the other intact)
+  // Save cells to buffer (so we operate with one array keeping the other intact)
   for (int x=0; x<width/cellSize; x++) {
     for (int y=0; y<height/cellSize; y++) {
       cellsBuffer[x][y] = cells[x][y];
@@ -148,15 +147,16 @@ void iteration() { // When the clock ticks
         } // End of yy loop
       } //End of xx loop
       // We've checked the neigbours: apply rules!
-      if (cellsBuffer[x][y]==1) { // The cell is alive: kill it if necessary
-        if (neighbours < 2 || neighbours > 3) {
-          cells[x][y] = 0; // Die unless it has 2 or 3 neighbours
-        }
+      // A new cell is alive if the total number of alive neighbours in its neighborhood 
+      // grid is four, six, seven, eight, or nine, and the new cell is dead if the 
+      // total number of alive neighbours is zero, one, two, three, or five.= 
+      // Alive = 1   Dead = 0  
+      int nm = neighbours + cellsBuffer[x][y];
+      if (nm == 4 || nm >= 6) { // 4, 6, 7, 8, 9 alive => majority alive => be alive
+        cells[x][y] = 1; 
       } 
-      else { // The cell is dead: make it live if necessary      
-        if (neighbours == 3 ) {
-          cells[x][y] = 1; // Only if it has 3 neighbours
-        }
+      else { // 0, 1, 2, 3, 5 alive => majority dead => be dead
+        cells[x][y] = 0; 
       } // End of if
     } // End of y loop
   } // End of x loop
