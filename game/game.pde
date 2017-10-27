@@ -21,11 +21,14 @@ Source: https://processing.org/examples/gameoflife.html
 Modifications by: Maria Camila Remolina Gutierrez
 */
 
+// Value of the snapshot
+int frameNumber = 0;
+
 // Size of cells
 int cellSize = 10;
 
 // How likely for a cell to be alive at start (in percentage)
-float probabilityOfAliveAtStart = 15;
+float probabilityOfAliveAtStart = 50;
 
 // Variables for timer
 int interval = 100;
@@ -160,6 +163,9 @@ void iteration() { // When the clock ticks
       } // End of if
     } // End of y loop
   } // End of x loop
+  
+  saveFrame("frames/"+frameNumber+".png");
+  frameNumber++;
 } // End of function
 
 
