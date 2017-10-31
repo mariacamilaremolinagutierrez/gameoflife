@@ -10,7 +10,7 @@ in the next generation
 next generation
 4. Survival: Each live cell with two live neighbors survives in the next
 generation
-
+5. Use a computer
 Instructions:
 * Press SPACE BAR to pause and change the cell's values with the mouse 
 * On pause, click to activate/deactivate cells 
